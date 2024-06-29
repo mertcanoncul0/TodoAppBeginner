@@ -346,15 +346,44 @@ body {
   display: block;
 }
 
-.complete-btn {
+.status-btn {
   font-size: 1rem;
   font-weight: 300;
   cursor: pointer;
   margin-right: 0;
+  padding: 0.25em 0.5em;
+  border-bottom: 1px solid transparent;
+  transition: padding 150ms ease-in-out;
+  background-color: hsl(216, 68%, 52%);
+  color: hsl(0, 0%, 96%);
+
+  border-radius: 4px;
 }
 
-.complete-btn:is(:focus, :hover) {
-  border-bottom: 1px solid currentColor;
+.status-btn.active {
+  background-color: hsl(0, 0%, 96%);
+  color: hsl(216, 68%, 52%);
+  padding: 0.35em 0.6em;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    visibility: visible;
+  }
+  to {
+    opacity: 0;
+    visibility: hidden;
+    display: none;
+  }
+}
+
+.fade-out {
+  animation: fadeOut 0.3s ease-in-out forwards;
+}
+
+.status-btn:where(:not(.active)):is(:focus, :hover) {
+  padding: 0.35em 0.6em;
 }
 
 .hidden {

@@ -8,6 +8,8 @@ const taskForm = document.querySelector('[data-tasks-form]')
 const taskInput = document.querySelector('[data-task-input]')
 const tasksContainer = document.querySelector('[data-tasks]')
 const getCompleteBtn = document.querySelector('[data-get-tasks-complete]')
+const getAllBtn = document.querySelector('[data-get-tasks-all]')
+const getInCompleteBtn = document.querySelector('[data-get-tasks-incomplete]')
 const listTemplate = document.querySelector('[data-list-template]')
 const taskTemplate = document.querySelector('[data-task-template]')
 
@@ -28,13 +30,52 @@ function getCompleteHandler() {
   this.parentElement.querySelectorAll('.tasks > .task').forEach((task) => {
     let taskChecked = task.querySelector('input')
 
+    getInCompleteBtn.classList.remove('active')
+    getAllBtn.classList.remove('active')
+    getCompleteBtn.classList.add('active')
+
+    if (taskChecked.checked) {
+      task.classList.remove('fade-out')
+    }
+
     if (!taskChecked.checked) {
-      task.classList.add('hidden')
+      task.classList.add('fade-out')
+    }
+  })
+}
+
+function getAllTasksHandler() {
+  this.parentElement.querySelectorAll('.tasks > .task').forEach((task) => {
+    getCompleteBtn.classList.remove('active')
+    getInCompleteBtn.classList.remove('active')
+
+    if (task.classList.contains('fade-out')) {
+      task.classList.remove('fade-out')
+    }
+  })
+}
+
+function getInCompleteHandler() {
+  this.parentElement.querySelectorAll('.tasks > .task').forEach((task) => {
+    let taskChecked = task.querySelector('input')
+
+    getCompleteBtn.classList.remove('active')
+    getAllBtn.classList.remove('active')
+    getInCompleteBtn.classList.add('active')
+
+    if (!taskChecked.checked) {
+      task.classList.remove('fade-out')
+    }
+
+    if (taskChecked.checked) {
+      task.classList.add('fade-out')
     }
   })
 }
 
 getCompleteBtn.addEventListener('click', getCompleteHandler)
+getInCompleteBtn.addEventListener('click', getInCompleteHandler)
+getAllBtn.addEventListener('click', getAllTasksHandler)
 
 function createList(listName) {
   return { id: Date.now().toString(), name: listName, tasks: [] }

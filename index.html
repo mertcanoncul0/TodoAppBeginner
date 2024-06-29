@@ -70,11 +70,25 @@
         </div>
 
         <button
-          class="complete-btn"
+          class="status-btn active"
+          data-get-tasks-all
+          aria-label="get all tasks"
+        >
+          All
+        </button>
+        <button
+          class="status-btn"
           data-get-tasks-complete
           aria-label="get completed tasks"
         >
-          get complete tasks
+          Complete
+        </button>
+        <button
+          class="status-btn"
+          data-get-tasks-incomplete
+          aria-label="get incomplete tasks"
+        >
+          Incomplete
         </button>
       </div>
     </div>
